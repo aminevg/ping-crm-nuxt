@@ -7,7 +7,7 @@
     "preview": "nuxt preview",
     "prepare": "husky install",
     "lint": "npm run lint:prettier && npm run lint:eslint",
-    "lint:prettier": "prettier --check --no-error-on-unmatched-pattern --ignore-path .gitignore **/*.{js,json,ts,vue,css,md}",
+    "lint:prettier": "prettier --check --no-error-on-unmatched-pattern --ignore-path .gitignore **/*.{js,json,ts,vue,css,md,yaml,yml}",
     "lint:eslint": "eslint --ignore-path .gitignore --max-warnings 0 '**/*.{js,ts,vue}'"
   },
   "devDependencies": {
@@ -25,6 +25,6 @@
   },
   "lint-staged": {
     "*.{js,ts,vue}": "eslint --cache --fix",
-    "*.{js,json,ts,vue,css,md}": "prettier --write"
+    "*.{js,json,ts,vue,css,md,yaml,yml}": "prettier --write"
   }
 }
