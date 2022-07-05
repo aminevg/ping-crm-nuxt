@@ -17,7 +17,8 @@ model User {
   first_name String   @db.Char(25)
   last_name  String   @db.Char(25)
   email      String   @unique @db.Char(50)
-  password   String?
+  password   String
+  salt       String
   photoPath  String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
