@@ -28,5 +28,8 @@
   "lint-staged": {
     "*.{js,ts,vue}": "eslint --cache --fix",
     "*.{js,json,ts,vue,css,md,yaml,yml,prisma}": "prettier --write"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.0.0"
   }
 }
