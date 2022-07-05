@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  first_name String   @db.Char(25)
+  last_name  String   @db.Char(25)
+  email      String   @unique @db.Char(50)
+  password   String
+  salt       String
+  photoPath  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Organization {
+  id          Int       @id @default(autoincrement())
+  contacts    Contact[]
+  name        String    @db.Char(100)
+  email       String?   @db.Char(50)
+  phone       String?   @db.Char(50)
+  address     String?   @db.Char(150)
+  city        String?   @db.Char(50)
+  region      String?   @db.Char(50)
+  country     String?   @db.Char(2)
+  postal_code String?   @db.Char(25)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Contact {
+  id             Int           @id @default(autoincrement())
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId Int?
+  first_name     String        @db.Char(25)
+  last_name      String        @db.Char(25)
+  email          String?       @db.Char(50)
+  phone          String?       @db.Char(50)
+  address        String?       @db.Char(150)
+  city           String?       @db.Char(50)
+  region         String?       @db.Char(50)
+  country        String?       @db.Char(2)
+  postal_code    String?       @db.Char(25)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([organizationId])
+}
